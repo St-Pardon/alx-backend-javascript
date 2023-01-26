@@ -1,5 +1,5 @@
 {
-  "name": "0x02. ES6 classes",
+  "name": "ES6-classes",
   "version": "1.0.0",
   "description": "JavScript Classess",
   "scripts": {
@@ -19,7 +19,10 @@
     "eslint-plugin-jest": "^22.17.0",
     "jest": "^24.9.0"
   },
-  "keywords": ["JavaScript", "Promises"],
+  "keywords": [
+    "JavaScript",
+    "Promises"
+  ],
   "author": "Onu Onyedikachi",
   "license": "ISC"
 }
