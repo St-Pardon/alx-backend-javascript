@@ -9,9 +9,9 @@ Each object should have three attributes: `id` (Number), `firstName` (String), a
 
 The array contains the following students in order:
 
-- [ ] `Guillaume`, id: `1`, in `San Francisco`
-- [ ] `James`, id: `2`, in `Columbia`
-- [ ] `Serena`, id: `5`, in `San Francisco`
+- [x] `Guillaume`, id: `1`, in `San Francisco`
+- [x] `James`, id: `2`, in `Columbia`
+- [x] `Serena`, id: `5`, in `San Francisco`
 
 ```sh
 $ cat 0-main.js
@@ -24,6 +24,54 @@ console.log(getListStudents());
 [
   { id: 1, firstName: 'Guillaume', location: 'San Francisco' },
   { id: 2, firstName: 'James', location: 'Columbia' },
+  { id: 5, firstName: 'Serena', location: 'San Francisco' }
+]
+~$ 
+```
+
+### [1. More mapping](./1-get_list_student_ids.js)
+Create a function `getListStudentIds` that returns an array of ids from a list of object.
+
+This function is taking one argument which is an array of objects - and this array is the same format as `getListStudents` from the previous task.
+
+If the argument is not an array, the function is returning an empty array.
+
+You must use the `map` function on the array.
+```sh
+~$ cat 1-main.js
+import getListStudentIds from "./1-get_list_student_ids.js";
+import getListStudents from "./0-get_list_students.js";
+
+console.log(getListStudentIds("hello"));
+console.log(getListStudentIds(getListStudents()));
+
+~$ 
+~$ npm run dev 1-main.js 
+[]
+[ 1, 2, 5 ]
+~$ 
+```
+
+
+### [2. Filter]()
+Create a function `getStudentsByLocation` that returns an array of objects who are located in a specific city.
+
+It should accept a list of students (from `getListStudents`) and a `city` (string) as parameters.
+
+You must use the `filter` function on the array.
+```sh
+~$ cat 2-main.js
+import getListStudents from "./0-get_list_students.js";
+import getStudentsByLocation from "./2-get_students_by_loc.js";
+
+const students = getListStudents();
+
+console.log(getStudentsByLocation(students, 'San Francisco'));
+
+~$ 
+~$ npm run dev 2-main.js 
+[
+  { id: 1, firstName: 'Guillaume', location: 'San Francisco' },
   { id: 5, firstName: 'Serena', location: 'San Francisco' }
 ]
 ~$ 
