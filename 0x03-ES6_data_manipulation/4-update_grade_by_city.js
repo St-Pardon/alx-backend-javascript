@@ -6,8 +6,7 @@ export default function updateStudentGradeByCity(list, city, newGrade) {
     .map((item) => ({
       ...item,
       grade: (
-        newGrade.filter((grade) => grade.studentId === item.id).pop() ||
-        defaultGrade
-      ).grade,
+        newGrade.filter((grade) => grade.studentId === item.id)
+          .pop() || defaultGrade).grade,
     }));
 }
