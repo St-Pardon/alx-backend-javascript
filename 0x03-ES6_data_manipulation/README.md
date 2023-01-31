@@ -173,3 +173,168 @@ DataView {
 ```
 
 
+### [6. Set data structure](./6-set.js)
+Create a function named `setFromArray` that returns a `Set` from an array.
+
+It accepts an argument (Array, of any kind of element).
+```sh
+~$ cat 6-main.js
+import setFromArray from "./6-set.js";
+
+console.log(setFromArray([12, 32, 15, 78, 98, 15]));
+
+~$ 
+~$ npm run dev 6-main.js 
+Set { 12, 32, 15, 78, 98 }
+~$ 
+```
+
+
+### [7. More set data structure](./7-has_array_values.js)
+Create a function named `hasValuesFromArray` that returns a boolean if all the elements in the array exist within the set.
+
+It accepts two arguments: a `set` (Set) and an `array` (Array).
+```sh
+~$ cat 7-main.js
+import hasValuesFromArray from "./7-has_array_values.js";
+
+console.log(hasValuesFromArray(new Set([1, 2, 3, 4, 5]), [1]));
+console.log(hasValuesFromArray(new Set([1, 2, 3, 4, 5]), [10]));
+console.log(hasValuesFromArray(new Set([1, 2, 3, 4, 5]), [1, 10]));
+
+~$ 
+~$ npm run dev 7-main.js 
+true
+false
+false
+~$ 
+```
+
+
+### [8. Clean set](./8-clean_set.js)
+Create a function named `cleanSet` that returns a string of all the set values that start with a specific string (`startString`).
+
+It accepts two arguments: a `set` (Set) and a `startString` (String).
+
+When a value starts with `startString` you only append the rest of the string. The string contains all the values of the set separated by -.
+```sh
+~$ cat 8-main.js
+import cleanSet from "./8-clean_set.js";
+
+console.log(cleanSet(new Set(['bonjovi', 'bonaparte', 'bonappetit', 'banana']), 'bon'));
+console.log(cleanSet(new Set(['bonjovi', 'bonaparte', 'bonappetit', 'banana']), ''));
+
+~$ 
+~$ npm run dev 8-main.js 
+jovi-aparte-appetit
+
+~$ 
+```
+### [9. Map data structure](./9-groceries_list.js)
+
+Create a function named `groceriesList` that returns a map of groceries with the following items (name, quantity):
+```
+Apples, 10
+Tomatoes, 10
+Pasta, 1
+Rice, 1
+Banana, 5
+```
+Result:
+```sh
+~$ cat 9-main.js
+import groceriesList from "./9-groceries_list.js";
+
+console.log(groceriesList());
+
+~$ 
+~$ npm run dev 9-main.js 
+Map {
+  'Apples' => 10,
+  'Tomatoes' => 10,
+  'Pasta' => 1,
+  'Rice' => 1,
+  'Banana' => 5
+}
+~$ 
+```
+
+
+### [10. More map data structure](./10-update_uniq_items.js)
+Create a function named `updateUniqueItems` that returns an updated map for all items with initial quantity at 1.
+
+It should accept a map as an argument. The map it accepts for argument is similar to the map you create in the previous task.
+
+For each entry of the map where the quantity is 1, update the quantity to 100. If updating the quantity is not possible (argument is not a map) the error `Cannot process` should be thrown.
+```sh
+~$ cat 10-main.js
+import updateUniqueItems from "./10-update_uniq_items.js";
+import groceriesList from "./9-groceries_list.js";
+
+const map = groceriesList();
+console.log(map);
+
+updateUniqueItems(map)
+console.log(map);
+
+~$ 
+~$ npm run dev 10-main.js 
+Map {
+  'Apples' => 10,
+  'Tomatoes' => 10,
+  'Pasta' => 1,
+  'Rice' => 1,
+  'Banana' => 5
+}
+Map {
+  'Apples' => 10,
+  'Tomatoes' => 10,
+  'Pasta' => 100,
+  'Rice' => 100,
+  'Banana' => 5
+}
+~$ 
+```
+
+
+### [11. Weak link data structure](./100-weak.js)
+#advanced
+Export a `const` instance of `WeakMap` and name it `weakMap`.
+
+Export a new function named `queryAPI`. It should accept an endpoint argument like so:
+```js
+  {
+    protocol: 'http',
+    name: 'getUsers',
+  }
+```
+Track within the `weakMap` the number of times `queryAPI` is called for each endpoint.
+
+When the number of queries is >= 5 throw an error with the message `Endpoint load is high`.
+```sh
+~$ cat 100-main.js
+import { queryAPI, weakMap } from "./100-weak.js";
+
+const endpoint = { protocol: 'http', name: 'getUsers' };
+weakMap.get(endpoint);
+
+queryAPI(endpoint);
+console.log(weakMap.get(endpoint));
+
+queryAPI(endpoint);
+console.log(weakMap.get(endpoint));
+
+queryAPI(endpoint);
+queryAPI(endpoint);
+queryAPI(endpoint);
+queryAPI(endpoint);
+
+~$ 
+~$ npm run dev 100-main.js 
+1
+2
+.../100-weak.js:16
+    throw new Error('Endpoint load is high');
+   ...
+~$ 
+```
