@@ -6,7 +6,13 @@
  * @returns {String}
  */
 export default function cleanSet(set, startString) {
-  if (!startString) return '';
+  if (
+    !startString || !(set instanceof Set)
+    || typeof startString !== 'string'
+    || !set
+  ) {
+    return '';
+  }
   const result = [];
   for (const elem of set) {
     if (elem.startsWith(startString)) {
