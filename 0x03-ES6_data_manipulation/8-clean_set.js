@@ -16,7 +16,9 @@ export default function cleanSet(set, startString) {
   const result = [];
   for (const elem of set) {
     if (elem.startsWith(startString) && typeof elem === 'string') {
-      result.push(elem.slice(startString.length));
+      const value = elem.slice(startString.length);
+
+      if (value && value !== elem) result.push(value);
     }
   }
   return result.join('-');
