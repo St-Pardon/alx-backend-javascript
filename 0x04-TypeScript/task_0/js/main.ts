@@ -1,8 +1,8 @@
 interface Student {
-  firstName: String;
-  lastName: String;
-  age: Number;
-  location: String;
+  firstName: string;
+  lastName: string;
+  age: number;
+  location: string;
 }
 
 const Student1: Student = {
@@ -19,7 +19,7 @@ const Student2: Student = {
   location: 'Port Hacort',
 };
 
-const studentsList: Array<Student> = [Student1, Student2];
+const studentsList: Student[] = [Student1, Student2];
 
 const styleSheet = `
 * {
