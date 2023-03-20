@@ -35,7 +35,7 @@ function countStudents(path) {
         `Number of students in ${key[i]}: ${field[key[i]]}. List: ${arr
           .filter((item) => item.field === key[i])
           .map((item) => item.firstname)
-          .join(', ')}`
+          .join(', ')}`,
       );
     }
   }
