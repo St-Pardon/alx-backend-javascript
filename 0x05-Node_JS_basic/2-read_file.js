@@ -1,8 +1,10 @@
-const { readFileSync } = require('fs');
+const { readFileSync, existsSync } = require('fs');
 
 function countStudents(path) {
+  if (!existsSync(path)) {
+    throw new Error('Cannot load the database');
+  }
   const data = readFileSync(path, 'utf8');
-  if (!data) throw new Error('Cannot load the database');
   const list = data.split('\n');
   const field = {};
   const head = list[0].split(',');
@@ -33,7 +35,7 @@ function countStudents(path) {
         `Number of students in ${key[i]}: ${field[key[i]]}. List: ${arr
           .filter((item) => item.field === key[i])
           .map((item) => item.firstname)
-          .join(', ')}`,
+          .join(', ')}`
       );
     }
   }
