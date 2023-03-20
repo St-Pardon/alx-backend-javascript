@@ -9,3 +9,5 @@ const app = http.createServer((req, res) => {
 app.listen(PORT, '127.0.0.1', () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
+
+module.exports = app;
