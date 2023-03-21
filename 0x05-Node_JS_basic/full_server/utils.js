@@ -6,48 +6,45 @@ import { readFile } from 'fs';
  * @returns promise
  */
 function readDatabase(path) {
-  return new Promise((resolve, reject) => (
-    readFile(path, 'utf8', (err, data) => {
-      if (err) reject(new Error('Cannot load the database'));
-      if (data) {
-        const result = [];
-        const list = data.toString('utf-8').trim().split('\n');
-        const field = {};
-        const head = list[0].split(',');
-        const arr = [];
-        for (const i in list) {
-          if (i !== '0') {
-            const obj = {};
-            const item = list[i].split(',');
-            for (const j in item) {
-              if (j) {
-                if (j === '3' && Object.hasOwn(field, item[j])) {
-                  field[item[j]] += 1;
-                }
-                if (j === '3' && !Object.hasOwn(field, item[j])) {
-                  field[item[j]] = 1;
-                }
-                obj[head[j]] = item[j];
-              }
-            }
-            arr.push(obj);
-          }
+  return new Promise((resolve, reject) => {
+    if (!path) {
+      reject(new Error('Cannot load the database'));
+    }
+    if (path) {
+      readFile(path, (err, data) => {
+        if (err) {
+          reject(new Error('Cannot load the database'));
         }
-        result.push(`\nNumber of students: ${list.length - 1}`);
-        const key = Object.keys(field);
-        for (const i in key) {
-          if (i) {
-            result.push(
-              `Number of students in ${key[i]}: ${field[key[i]]}. List: ${arr
-                .filter((item) => item.field === key[i])
-                .map((item) => item.firstname)
-                .join(', ')}`,
+        if (data) {
+          const fileLines = data.toString('utf-8').trim().split('\n');
+          const studentGroups = {};
+          const dbFieldNames = fileLines[0].split(',');
+          const studentPropNames = dbFieldNames.slice(
+            0,
+            dbFieldNames.length - 1,
+          );
+
+          for (const line of fileLines.slice(1)) {
+            const studentRecord = line.split(',');
+            const studentPropValues = studentRecord.slice(
+              0,
+              studentRecord.length - 1,
             );
+            const field = studentRecord[studentRecord.length - 1];
+            if (!Object.keys(studentGroups).includes(field)) {
+              studentGroups[field] = [];
+            }
+            const studentEntries = studentPropNames.map((propName, idx) => [
+              propName,
+              studentPropValues[idx],
+            ]);
+            studentGroups[field].push(Object.fromEntries(studentEntries));
           }
+          resolve(studentGroups);
         }
-        resolve(result.join('\n'));
-      }
-    })));
+      });
+    }
+  });
 }
 
 export default readDatabase;
