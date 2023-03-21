@@ -72,3 +72,5 @@ app.get('/', (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server running on http:127.0.0.1:${PORT}`);
 });
+
+module.exports = app;
