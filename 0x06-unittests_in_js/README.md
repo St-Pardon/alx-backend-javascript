@@ -1,2 +1,3 @@
-# Please add a .gitignore file to avoid redundancy
-# To be updated
+# 0x06-unittests_in_js
+
+
